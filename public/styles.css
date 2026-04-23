@@ -8,11 +8,11 @@
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   --radius: 18px;
   --max-width: 1200px;
+  --success: #1a7f4b;
+  --error-color: #c0392b;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -23,36 +23,31 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 .container {
   width: min(100% - 2rem, var(--max-width));
   margin: 0 auto;
 }
 
+/* ── Header ─────────────────────────────────────────── */
 .site-header {
   background: linear-gradient(135deg, var(--primary), #b40b3b);
   color: var(--light);
   padding: 2rem 0;
 }
 
-.site-title {
-  margin: 0;
-}
+.site-title { margin: 0; }
 
 .author-card {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255,255,255,0.15);
   padding: 1rem;
   border-radius: var(--radius);
 }
 
-main {
-  padding: 2rem 0;
-  flex: 1;
-}
+/* ── Layout ─────────────────────────────────────────── */
+main { padding: 2rem 0; flex: 1; }
 
-.layout {
-  display: grid;
-  gap: 1.5rem;
-}
+.layout { display: grid; gap: 1.5rem; }
 
 .hero-card,
 .panel {
@@ -62,40 +57,87 @@ main {
   box-shadow: var(--shadow);
 }
 
-.content-grid {
-  display: grid;
-  gap: 1.5rem;
-}
+.content-grid { display: grid; gap: 1.5rem; }
 
+/* ── Form ───────────────────────────────────────────── */
 .placeholder-box {
   border: 2px dashed var(--border);
   padding: 2rem;
   text-align: center;
 }
 
-.site-footer {
-  background: var(--dark);
-  color: var(--light);
-  text-align: center;
-  padding: 1rem;
+/* Override placeholder-box when the form is inside */
+#customer-form {
+  border: none;
+  padding: 0;
+  text-align: left;
 }
 
-.customer-card {
-  background: #ffffff;
-  border: 1px solid #ddd;
-  border-left: 4px solid var(--primary);
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #7b1f1f;
+  margin-bottom: 0.35rem;
+  color: var(--accent);
+}
+
+.required { color: var(--primary); }
+
+.form-group input {
+  padding: 0.55rem 0.75rem;
+    background: #fafafa;
+  border: 1px solid #e0e0e0;
   border-radius: 10px;
-  padding: 0.8rem;
-  margin-bottom: 0.6rem;
+  font-size: 1rem;
+  transition: border-color 0.15s;
+  outline: none;
+}
+
+
+.form-group input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(225,14,73,0.12);
+}
+
+/* ── Buttons ─────────────────────────────────────────── */
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  transition: opacity 0.15s, transform 0.1s;
 }
 
-.customer-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
+.btn:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
 
+.btn-primary  { background: var(--primary); color: #fff; }
+
+.btn-danger {
+  background: #fff;
+  color: #c0392b;
+  border: 1px solid #c0392b;
+}
+.btn-secondary { background: #6c757d;       color: #fff; }
+
+/* old generic button kept for compatibility */
 button {
   margin-top: 1rem;
   padding: 0.6rem 1rem;
@@ -105,20 +147,100 @@ button {
   color: white;
   cursor: pointer;
 }
+button:hover { opacity: 0.9; }
 
-button:hover {
-  opacity: 0.9;
+/* ── Status message ──────────────────────────────────── */
+.form-status {
+  font-size: 0.875rem;
+  min-height: 1.2em;
+  margin: 0.5rem 0 0;
+}
+.form-status.success { color: var(--success); font-weight: 600; }
+.form-status.error   { color: var(--error-color); font-weight: 600; }
+
+/* ── Customer Cards ──────────────────────────────────── */
+.customer-card {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: #ffffff;
+  flex-direction: column;  
+  text-align: center; 
+  border: 1.5px solid #ddd;
+  border-left: 4px solid var(--primary);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.6rem;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, border-color 0.15s;
 }
 
-.site-title-link {
-  color: inherit;
-  text-decoration: none;
+.tag {
+  font-size: 11px;
+  background: #fff5f8;
+  color: #e10e49;
+  border: 1px solid #fbc8d6;
+  border-radius: 20px;
+  padding: 2px 10px;
+  display: inline-block;
+  margin-bottom: 8px;
 }
 
-.site-title-link:hover {
-  text-decoration: underline;
+.customer-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
+.customer-card.selected {
+  border-color: var(--primary);
+  background: #fff0f4;
+  box-shadow: 0 0 0 3px rgba(225,14,73,0.18);
+}
+
+.card-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  align-items: center;    
+  text-align: center;   
+}
+
+.card-body strong { font-size: 1rem; }
+
+.card-detail {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.empty-state { color: #888; font-style: italic; }
+
+/* ── Footer ─────────────────────────────────────────── */
+.site-footer {
+  background: var(--dark);
+  color: var(--light);
+  text-align: center;
+  padding: 1rem;
+}
+
+/* ── Misc ───────────────────────────────────────────── */
+.site-title-link { color: inherit; text-decoration: none; }
+.site-title-link:hover { text-decoration: underline; }
+
+/* ── Responsive ─────────────────────────────────────── */
 @media (min-width: 900px) {
   .header-grid {
     display: grid;
